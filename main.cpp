@@ -25,6 +25,25 @@ string getUserInput(){
     return tmpWord;
 }
 
+WordSet getUserSet(){
+    WordSet newSet;
+    string nazwa;
+    cout << "podaj nazwe dla tego zestawu: \n";
+    cin >> nazwa;
+    newSet.setWord(nazwa);
+    int n;
+    cout << "ile bedzie slowek? \n";
+    cin >> n;
+
+    Word tmp;
+    for(int i = 0; i < n; i++){
+        tmp = getUserWord();
+        newSet.addWord(tmp);
+    }
+
+    return newSet;
+}
+
 WordSet readFile(string file){
        WordSet newSet;
        newSet.setName(file);
@@ -85,6 +104,24 @@ WordSet readFile(string file){
     }
 
        return wynik;
+
+}
+
+void zapiszSet(WordSet set){
+    ofstream plik;
+    plik.open(set.getName() + ".csv");
+
+    list<Word> tmp = set.getWords();
+
+    if(plik.is_open()){
+
+        list<Word>::iterator i;
+        for(i = tmp.begin(); i != tmp.end(); i++){
+            plik << i->getWord() <<';'<< i->getTranslation() << endl;
+        }
+    }
+
+    plik.close();
 
 }
 

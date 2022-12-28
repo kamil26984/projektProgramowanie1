@@ -49,8 +49,8 @@
 	"kind" : "codemodel",
 	"paths" : 
 	{
-		"build" : "C:/projekt/cmake-build-debug",
-		"source" : "C:/projekt"
+		"build" : "C:/projektProgramowanie1/cmake-build-debug",
+		"source" : "C:/projektProgramowanie1"
 	},
 	"version" : 
 	{

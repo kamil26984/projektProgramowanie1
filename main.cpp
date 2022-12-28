@@ -60,6 +60,33 @@ WordSet readFile(string file){
        }
    }
 
+   int test(list<Word> lista){
+    int n = lista.size();
+    string odp[n];
+    string tab[n];
+    cout << "podaj tlumaczenia nastepojacych slwo: \n";
+
+
+    int j = 0;
+    list<Word>::iterator i;
+    for(i = lista.begin(); i != lista.end(); i++){
+        tab[j] = i->getTranslation();
+        cout << i->getWord() << endl;
+        cin >> odp[j];
+        j++;
+    }
+    int wynik = 0;
+    for(int ii = 0; ii < n; ii++){
+        cout << tab[ii] << " " << odp[ii] << endl;
+        if(tab[ii] == odp[ii])
+            wynik++;
+        else
+            cout << "^^^" << endl;
+    }
+
+       return wynik;
+
+}
 
 int main() {
 
@@ -67,6 +94,7 @@ int main() {
        testSet = readFile("zestaw1");
        printList(testSet.getWords());
 
+       cout << "wynik testu : " << test(testSet.getWords()) << endl;
 
 
     return 0;

@@ -5,6 +5,7 @@
 #include <list>
 #include "Word.h"
 #include "WordSet.h"
+
 using namespace std;
 
 string getUserInput(){

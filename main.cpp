@@ -9,6 +9,7 @@
 #include <vector>
 #include <chrono>
 #include <random>
+#include <conio.h>
 
 using namespace std;
 
@@ -155,6 +156,22 @@ void addSet(){
     zapiszSet(nowy);
 }
 
+void nauka(){
+    cout << "wybierz zestaw: \n";
+    string nazwaZestawu;
+    cin >> nazwaZestawu;
+    WordSet zestaw;
+    zestaw = readFile(nazwaZestawu);
+
+    list<Word> tmp = zestaw.getWords();
+    list<Word>::iterator i;
+    for(i = tmp.begin(); i != tmp.end(); i++){
+        cout << i->getWord() << endl;
+        system("pause");
+        cout<< i->getTranslation() << "\n\n\n";
+    }
+}
+
 
 int program(){
     cout <<"dostepne opcje:\n";
@@ -171,7 +188,7 @@ int program(){
   if(opcja == "test")
       testuj();
   if(opcja == "nauka")
-      return 0;
+    nauka();
   if(opcja == "dodaj")
       addSet();
 

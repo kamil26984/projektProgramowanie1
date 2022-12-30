@@ -5,6 +5,10 @@
 #include <list>
 #include "Word.h"
 #include "WordSet.h"
+#include <algorithm>
+#include <vector>
+#include <chrono>
+#include <random>
 
 using namespace std;
 
@@ -79,25 +83,35 @@ WordSet readFile(string file){
        }
    }
 
+
    int test(list<Word> lista){
     int n = lista.size();
     string odp[n];
-    string tab[n];
-    cout << "podaj tlumaczenia nastepojacych slwo: \n";
+    string tlumaczenia[n];
+    string tabSlowek[n];
 
 
     int j = 0;
     list<Word>::iterator i;
     for(i = lista.begin(); i != lista.end(); i++){
-        tab[j] = i->getTranslation();
-        cout << i->getWord() << endl;
-        cin >> odp[j];
+        tabSlowek[j] = i->getWord();
+        tlumaczenia[j] = i->getTranslation();
+
         j++;
     }
+
+
+       cout << "podaj tlumaczenia nastepojacych slwo: \n";
+
+    for(int i = 0; i < n; i++){
+        cout << tabSlowek[i] << endl;
+        cin >> odp[i];
+    }
+
     int wynik = 0;
     for(int ii = 0; ii < n; ii++){
-        cout << tab[ii] << " " << odp[ii] << endl;
-        if(tab[ii] == odp[ii])
+        cout << tabSlowek[ii] << " : " << tlumaczenia[ii] << "\n " << odp[ii] << endl;
+        if(tlumaczenia[ii] == odp[ii])
             wynik++;
         else
             cout << "^^^" << endl;
@@ -125,14 +139,19 @@ void zapiszSet(WordSet set){
 
 }
 
+void testuj(){
+    cout << "wybierz zestaw: \n";
+    string nazwaZestawu;
+    cin >> nazwaZestawu;
+    WordSet zestaw;
+    zestaw = readFile(nazwaZestawu);
+    int n =  test(zestaw.getWords());
+    cout << "wynik testu : " << n << "/" << zestaw.getWords().size()<< endl;
+}
+
 int main() {
 
-       WordSet testSet;
-       testSet = readFile("zestaw1");
-       printList(testSet.getWords());
-
-       cout << "wynik testu : " << test(testSet.getWords()) << endl;
-
+testuj();
 
     return 0;
 }

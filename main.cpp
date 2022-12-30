@@ -88,15 +88,13 @@ WordSet readFile(string file){
    int test(list<Word> lista){
     int n = lista.size();
     string odp[n];
-    string tlumaczenia[n];
-    string tabSlowek[n];
-
+    string slowka[2][n];
 
     int j = 0;
     list<Word>::iterator i;
     for(i = lista.begin(); i != lista.end(); i++){
-        tabSlowek[j] = i->getWord();
-        tlumaczenia[j] = i->getTranslation();
+        slowka[0][j] = i->getWord();
+        slowka[1][j] = i->getTranslation();
 
         j++;
     }
@@ -105,14 +103,14 @@ WordSet readFile(string file){
        cout << "podaj tlumaczenia nastepojacych slwo: \n";
 
     for(int i = 0; i < n; i++){
-        cout << tabSlowek[i] << endl;
+        cout << slowka[0][i] << endl;
         cin >> odp[i];
     }
 
     int wynik = 0;
     for(int ii = 0; ii < n; ii++){
-        cout << tabSlowek[ii] << " : " << tlumaczenia[ii] << "\n " << odp[ii] << endl;
-        if(tlumaczenia[ii] == odp[ii])
+        cout << slowka[0][ii] << " : " << slowka[1][ii] << "\n " << odp[ii] << endl;
+        if(slowka[1][ii] == odp[ii])
             wynik++;
         else
             cout << "^^^" << endl;

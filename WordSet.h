@@ -31,7 +31,11 @@ public:
     std::list<Word> getWords(){
         return words;
     }
+
+
+public:
+    void wypisz();
+    void pomieszaj();
+
 };
-
-
 #endif //PROJEKT_WORDSET_H

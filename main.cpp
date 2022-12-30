@@ -85,7 +85,7 @@ WordSet readFile(string file){
    }
 
 
-   int test(list<Word> lista){
+   int test(list<Word> lista, int typ){
     int n = lista.size();
     string odp[n];
     string slowka[2][n];
@@ -102,15 +102,17 @@ WordSet readFile(string file){
 
        cout << "podaj tlumaczenia nastepojacych slwo: \n";
 
+    unsigned seed = 0;
+    random_shuffle(slowka[typ], slowka[typ] + n);
     for(int i = 0; i < n; i++){
-        cout << slowka[0][i] << endl;
+        cout << slowka[typ][i] << endl;
         cin >> odp[i];
     }
 
     int wynik = 0;
     for(int ii = 0; ii < n; ii++){
         cout << slowka[0][ii] << " : " << slowka[1][ii] << "\n " << odp[ii] << endl;
-        if(slowka[1][ii] == odp[ii])
+        if(slowka[typ][ii] == odp[ii])
             wynik++;
         else
             cout << "^^^" << endl;
@@ -142,10 +144,13 @@ void zapiszSet(WordSet set){
 void testuj(){
     cout << "wybierz zestaw: \n";
     string nazwaZestawu;
+    int typ;
     cin >> nazwaZestawu;
+    cout << "rodzaj testu?   0/1";
+    cin >> typ;
     WordSet zestaw;
     zestaw = readFile(nazwaZestawu);
-    int n =  test(zestaw.getWords());
+    int n =  test(zestaw.getWords(), typ);
     cout << "wynik testu : " << n << "/" << zestaw.getWords().size()<< endl;
 }
 

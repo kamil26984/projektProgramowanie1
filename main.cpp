@@ -19,12 +19,12 @@ string getUserInput(){
 }
 
    Word getUserWord() {
-    std::string tmp;
-    std::cout << "podaj slowko i tlumaczenie " << std::endl;
+    string tmp;
+    cout << "podaj slowko i tlumaczenie " << std::endl;
     Word tmpWord;
-    std::cin >> tmp;
+    tmp = getUserInput();
     tmpWord.setWord(tmp);
-    std::cin >> tmp;
+    cin >> tmp;
     tmpWord.setTranslation(tmp);
     return tmpWord;
 }
@@ -34,7 +34,7 @@ WordSet getUserSet(){
     string nazwa;
     cout << "podaj nazwe dla tego zestawu: \n";
     cin >> nazwa;
-    newSet.setWord(nazwa);
+    newSet.setName(nazwa);
     int n;
     cout << "ile bedzie slowek? \n";
     cin >> n;
@@ -123,7 +123,7 @@ WordSet readFile(string file){
 
 void zapiszSet(WordSet set){
     ofstream plik;
-    plik.open(set.getName() + ".csv");
+    plik.open("pliki/"+set.getName() + ".csv");
 
     list<Word> tmp = set.getWords();
 
@@ -136,6 +136,7 @@ void zapiszSet(WordSet set){
     }
 
     plik.close();
+    cout << "zestaw zapisany jako " << set.getName() << ".csv" << endl;
 
 }
 
@@ -149,9 +150,37 @@ void testuj(){
     cout << "wynik testu : " << n << "/" << zestaw.getWords().size()<< endl;
 }
 
+void addSet(){
+    WordSet nowy = getUserSet();
+    zapiszSet(nowy);
+}
+
+
+int program(){
+    cout <<"dostepne opcje:\n";
+    cout <<"test - sprawdz swoja wiedze z wybranym zestawem slowek\n"
+           "nauka - przejdz zestaw uczac sie\n"
+           "dodaj - dodaj nowy zestaw\n"
+           "wyjdz - zakoncz program\n";
+
+    string opcja;
+    cin >> opcja;
+
+  if(opcja == "wyjdz")
+      return 0;
+  if(opcja == "test")
+      testuj();
+  if(opcja == "nauka")
+      return 0;
+  if(opcja == "dodaj")
+      addSet();
+
+  return 1;
+}
+
 int main() {
 
-testuj();
+    program();
 
     return 0;
 }
